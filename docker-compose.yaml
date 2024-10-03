@@ -1,0 +1,26 @@
+services:
+  rustapp:
+    container_name: d621dab2-dfb0-46ab-87a9-8197498d4e29_devchallenge_21
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: postgres://postgres:postgres@d621dab2-dfb0-46ab-87a9-8197498d4e29_db:5432/postgres
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+  db:
+    container_name: d621dab2-dfb0-46ab-87a9-8197498d4e29_db
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
