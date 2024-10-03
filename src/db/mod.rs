@@ -13,6 +13,6 @@ pub async fn establish_connection() -> sqlx::PgPool {
 }
 
 pub async fn prepare_db(pool: &sqlx::PgPool) -> Result<(), sqlx::Error> {
-    pool.execute_many(include_str!("schema.sql"));
+    pool.execute(include_str!("schema.sql")).await?;
     Ok(())
 }

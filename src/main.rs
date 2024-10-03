@@ -11,7 +11,7 @@ use env_logger::Env;
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(Env::default().default_filter_or("debug"));
     let pool = db::establish_connection().await;
-    let _ = db::prepare_db(&pool).await;
+    db::prepare_db(&pool).await;
     let app_state = ai_config::AppState::new().await;
     let application = move || {
         App::new()
